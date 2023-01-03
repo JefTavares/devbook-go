@@ -2,7 +2,6 @@ package main
 
 import (
 	"api/src/config"
-	"api/src/logs"
 	"api/src/router"
 	"fmt"
 	"log"
@@ -22,7 +21,7 @@ import (
 func main() {
 
 	//logs.Write("olá mundo!", "./ola.log")
-	logs.Write("olá mundo!", "")
+	//logs.Write("olá mundo!", "")
 
 	config.Carregar()
 	r := router.Gerar()

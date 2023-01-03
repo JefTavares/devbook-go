@@ -3,7 +3,6 @@ package middlewares
 import (
 	"api/src/autenticacao"
 	"api/src/respostas"
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -11,7 +10,7 @@ import (
 // Loger escreve informações da requisição no terminal
 func Logger(proximaFuncao http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("\n %s %s %s", r.Method, r.RequestURI, r.Host)
+		log.Printf("\nMethod: %s URL: %s Host: %s", r.Method, r.RequestURI, r.Host)
 		proximaFuncao(w, r)
 	}
 }
@@ -20,7 +19,7 @@ func Logger(proximaFuncao http.HandlerFunc) http.HandlerFunc {
 // next
 func Autenticar(proximaFuncao http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("Autenticando...")
+		//fmt.Println("Autenticando...")
 		if erro := autenticacao.ValidarToken(r); erro != nil {
 			respostas.Erro(w, http.StatusUnauthorized, erro)
 			return
